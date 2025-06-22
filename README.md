@@ -1,5 +1,5 @@
 ```markdown
-# Shopping Cart Application
+# Store Application cart functionality
 
 A Django-based shopping cart functionality
 
@@ -32,7 +32,7 @@ A Django-based shopping cart functionality
    python3 manage.py runserver 
 
 6. **Initial data**:
-   - Access the admin panel at `http://localhost:8000/admin/` and log in.
+   - Access the admin panel at `http://localhost:8000/admin/` and log in using the crediantial set previously.
    - Add products manually in table if not added previously using python3 manage.py load_products
 
 
