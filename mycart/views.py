@@ -11,13 +11,15 @@ def cart_view(request):
         cart_items = []
         for product in products:
             field_name = f"product_{product.id}"
-            requested_qty = form.cleaned_data.get(field_name, 0) or 0
+            requested_qty = form.cleaned_data.get(field_name, 0)
 
-            if requested_qty > 0:
+            if requested_qty and requested_qty > 0:
                 if not product.is_available(requested_qty):
                     messages.error(request, product.get_stock_message(requested_qty))
                 else:
                     cart_items.append((product, requested_qty))
+            else:
+                messages.error(request, f"Invalid quantity for {product.name}. Please enter a valid number.")
 
         if not messages.get_messages(request):
             for product, requested_qty in cart_items:
