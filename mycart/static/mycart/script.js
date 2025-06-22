@@ -22,7 +22,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     const messagesContainer = document.getElementById('messages');
     if (messagesContainer) {
-        setTimeout(() => {
+        setTimeout(() => { // Fade out the messages after 4 seconds
             messagesContainer.classList.add('opacity-0');
             setTimeout(() => {
                 messagesContainer.remove();

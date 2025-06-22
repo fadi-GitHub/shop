@@ -10,7 +10,7 @@ class CartForm(forms.Form):
             'Carros': 1,
         }
         for product in products:
-            field_name = f"product_{product.id}"
+            field_name = f"product_{product.id}" # Unique field name for each product
             self.fields[field_name] = forms.DecimalField(
                 label=product.name,
                 min_value=0,
@@ -21,6 +21,6 @@ class CartForm(forms.Form):
                     'class': 'quantity-input w-20 text-right border rounded p-1',
                     'step': '0.01',
                     'min': '0',
-                    'data-price': str(product.price_per_kg),
+                    'data-price': str(product.price_per_kg),   # Store price per kg for JavaScript calculations
                 })
             )

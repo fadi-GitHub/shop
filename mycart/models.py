@@ -9,8 +9,8 @@ class Product(models.Model):
         return self.quantity_in_stock > 0 and self.quantity_in_stock >= requested_quantity
     
     def reduce_stock(self, quantity):
-            self.quantity_in_stock -= quantity
-            self.save()
+        self.quantity_in_stock -= quantity
+        self.save()
     
     def get_stock_message(self, requested_quantity):
         if self.quantity_in_stock == 0:
