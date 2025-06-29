@@ -45,4 +45,9 @@ A Django-based shopping cart functionality
 - Responsive design using Tailwind CSS.
 - Stock validation on order submission with descriptive error messages.
 - Order confirmation message on successful submission.
+
+![image alt](images/Screenshot 2025-06-30 at 12.32.00 am.png)
+![image alt](images/Screenshot 2025-06-30 at 12.32.40 am.png)
+![image alt](images/Screenshot 2025-06-30 at 12.33.06 am.png)
+![image alt](images/Screenshot 2025-06-30 at 12.33.32 am.png)
 ```
