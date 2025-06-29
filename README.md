@@ -46,7 +46,7 @@ A Django-based shopping cart functionality
 - Stock validation on order submission with descriptive error messages.
 - Order confirmation message on successful submission.
 
-![image alt](images/Screenshot 2025-06-30 at 12.32.00 am.png)
+![image alt](https://github.com/fadi-GitHub/shop/blob/df184a8f516a4cb527e36025b80d171791f50abb/images/Screenshot%202025-06-30%20at%2012.32.00%E2%80%AFam.png)
 ![image alt](images/Screenshot 2025-06-30 at 12.32.40 am.png)
 ![image alt](images/Screenshot 2025-06-30 at 12.33.06 am.png)
 ![image alt](images/Screenshot 2025-06-30 at 12.33.32 am.png)
