@@ -40,6 +40,7 @@ A Django-based shopping cart functionality
 - View and edit product inventory via Django admin.
 - Shopping cart with default quantities (Potatoes: 2kg, Carrots: 1kg, Onions: 1kg).
 - Not fixed for these three products more can be added.
+- Purchase History page to see the past purchases and total
 - Real-time price updates when modifying quantities.
 - Responsive design using Tailwind CSS.
 - Stock validation on order submission with descriptive error messages.

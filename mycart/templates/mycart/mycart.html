@@ -1,67 +1,100 @@
 {% load static %}
 {% load cart_extras %}
+{% load static tailwind_tags %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Shopping Cart</title>
-    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <link rel="stylesheet" href="{% static 'mycart/styles.css' %}">
+    {% tailwind_css %}
 </head>
-<body class="bg-gray-100 font-sans">
-    <div class="container mx-auto p-4">
-        <h1 class="text-3xl font-bold mb-6 text-center">Shopping Cart</h1>
-            {% if messages %}
-                <div id="messages" class="mb-6 max-w-lg mx-auto space-y-3">
-                    {% for message in messages %}
-                        <div class="flex items-center justify-between p-4 rounded-lg shadow-md relative transition-opacity duration-500
-                            {% if message.tags == 'error' %}
-                                bg-red-100 text-red-800 border border-red-300
-                            {% elif message.tags == 'success' %}
-                                bg-green-100 text-green-800 border border-green-300
-                            {% else %}
-                                bg-blue-100 text-blue-800 border border-blue-300
-                            {% endif %}">
-                            <div class="flex items-center">
-                                <span>{{ message }}</span>
+<body class="bg-gray-100 font-sans text-gray-900 antialiased">
+    <div class="container py-10 h-100 mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex justify-end items-center mb-8">
+            <a href="{% url 'purchase_history' %}" class="inline-flex items-center px-5 py-2 bg-blue-600 text-white font-semibold rounded-lg shadow hover:bg-blue-700 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-50">
+                <i class="fas fa-history mr-2"></i>
+                View Purchase History
+            </a>
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-12">
+                <div class="card card-registration card-registration-2 bg-white shadow-lg rounded-xl">
+                    <div class="card-body p-0">
+                        <div class="row g-0">
+                            <div class="col-lg-8">
+                                <div class="p-6">
+                                    <div class="flex justify-between items-center mb-6">
+                                        <h1 class="text-3xl font-bold">Shopping Cart</h1>
+                                        <h6 class="text-gray-500">{% if products %}{{ products|length }} items{% else %}0 items{% endif %}</h6>
+                                    </div>
+                                    <hr class="my-4 border-gray-200">
+                                    {% if messages %}
+                                        <div id="messages" class="mb-6 max-w-lg mx-auto space-y-3">
+                                            {% for message in messages %}
+                                                <div class="flex items-center justify-between p-4 rounded-lg shadow-md relative transition-opacity duration-500
+                                                    {% if message.tags == 'error' %}
+                                                        bg-red-100 text-red-800 border border-red-300
+                                                    {% elif message.tags == 'success' %}
+                                                        bg-green-100 text-green-800 border border-green-300
+                                                    {% else %}
+                                                        bg-blue-100 text-blue-800 border border-blue-300
+                                                    {% endif %}">
+                                                    <div class="flex items-center">
+                                                        <span>{{ message }}</span>
+                                                    </div>
+                                                </div>
+                                            {% endfor %}
+                                        </div>
+                                    {% endif %}
+                                    <form id="cart-form" method="POST" class="mx-auto">
+                                        {% csrf_token %}
+                                        {% for product in products %}
+                                            <div id='input-page' class="row mb-6 d-flex justify-content-between align-items-center">
+                                                <div class="col-md-2 col-lg-2 col-xl-2">
+                                                    {% if product.image %}
+                                                        <img src="{{ product.image.url }}" alt="{{ product.name }}" class="img-fluid rounded-lg w-20 h-20 object-cover">
+                                                    {% else %}
+                                                        <span class="text-gray-400">No image</span>
+                                                    {% endif %}
+                                                </div>
+                                                <div class="col-md-3 col-lg-3 col-xl-3">
+                                                    <h6 class="text-gray-500">Product</h6>
+                                                    <h6 class="mb-0">{{ product.name }}</h6>
+                                                </div>
+                                                <div class="col-md-3 col-lg-3 col-xl-2 d-flex items-center">
+                                                        {{ form|get_field:product }}                                             
+                                                </div>
+                                                <div class="col-md-3 col-lg-2 col-xl-2 offset-lg-0">
+                                                    <h6 class="product-price mb-0 text-gray-600">{{ product.price_per_kg|floatformat:2 }} AED/kg</h6>
+                                                </div>
+                                                <div class="col-md-1 col-lg-1 col-xl-1 text-end">
+                                                    <span class="line-total text-gray-900 font-medium">0.00 AED</span>
+                                                </div>
+                                            </div>
+                                            <hr class="my-4 border-gray-200">
+                                        {% empty %}
+                                            <p class="text-center text-gray-500">Your cart is empty.</p>
+                                        {% endfor %}
+                                        <div class="bg-gray-50 p-6 mt-6 rounded-xl shadow-lg">
+                                            <div class="flex justify-between mb-5 text-gray-900 font-bold">
+                                                <h5>Total</h5>
+                                                <h5 id="total">0.00 AED</h5>
+                                            </div>
+                                        </div>
+                                        <div class="mt-8 text-center"></div>
+                                            <button type="submit" class="inline-flex items-center px-5 py-2 bg-blue-600 text-white font-semibold rounded-lg shadow hover:bg-blue-700 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-50">Buy Now</button>
+                                        </div>
+                                    </form>
+                                </div>
                             </div>
+                            
                         </div>
-                    {% endfor %}
+                    </div>
                 </div>
-            {% endif %}
-        <form id="cart-form" method="POST" class="max-w-lg mx-auto">
-            {% csrf_token %}
-            <table class="min-w-full bg-white shadow-md rounded-lg overflow-hidden">
-                <thead class="bg-gray-200">
-                    <tr>
-                        <th class="px-4 py-2 text-left">Product</th>
-                        <th class="px-4 py-2 text-right">Quantity (kg)</th>
-                        <th class="px-4 py-2 text-right">Price (per kg in AED)</th>
-                        <th class="px-4 py-2 text-right">Line Total (AED)</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {% for product in products %}
-                    <tr class="border-t">
-                        <td class="px-4 py-4">{{ product.name }}</td>
-                        <td class="px-4 py-4 text-right">
-                            {{ form|get_field:product }}
-                        </td>
-                        <td class="px-4 py-4 text-right">{{ product.price_per_kg }}</td>
-                        <td class="line-total px-4 py-4 text-right">0.00</td>
-                    </tr>
-                    {% endfor %}
-                    <tr class="border-t bg-gray-100">
-                        <td colspan="3" class="px-4 py-4 text-right font-bold">Total</td>
-                        <td id="total" class="px-4 py-4 text-right font-bold">0.00</td>
-                    </tr>
-                </tbody>
-            </table>
-            <div class="mt-4 text-center">
-                <button type="submit" class="bg-blue-500 text-white px-6 py-2 rounded hover:bg-blue-600">Buy Now</button>
             </div>
-        </form>
+        </div>
     </div>
     <script src="{% static 'mycart/script.js' %}"></script>
 </body>

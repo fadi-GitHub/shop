@@ -1,22 +1,22 @@
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', () => {
     const inputs = document.querySelectorAll('.quantity-input');
     const totalElement = document.querySelector('#total');
 
-    const updateTotals = () => {
+    function updateTotals() {
         let total = 0;
         inputs.forEach(input => {
             const quantity = parseFloat(input.value) || 0;
-            const pricePerKg = parseFloat(input.dataset.price);
-            const lineTotal = input.parentElement.nextElementSibling.nextElementSibling;
-            const lineAmount = quantity * pricePerKg;
-            lineTotal.textContent = lineAmount.toFixed(2);
-            total += lineAmount;
+            const price = parseFloat(input.dataset.price) || 0;
+            const lineTotal = quantity * price;
+            total += lineTotal;
+            const lineTotalElement = input.closest('#input-page').querySelector('.line-total');
+            lineTotalElement.textContent = `${lineTotal.toFixed(2)} AED`;
         });
-        totalElement.textContent = total.toFixed(2);
-    };
+        totalElement.textContent = `${total.toFixed(2)} AED`;
+    }
 
     inputs.forEach(input => {
-        input.addEventListener('input', updateTotals);
+        input.addEventListener('change', updateTotals);
     });
     updateTotals();
 
@@ -30,4 +30,3 @@ document.addEventListener('DOMContentLoaded', function() {
         }, 4000);
     }
 });
-

@@ -16,11 +16,14 @@ class CartForm(forms.Form):
                 min_value=0,
                 decimal_places=2,
                 required=False,
-                initial=default_quantities.get(product.name, 0) if product.name in default_quantities else 1,
+                initial=default_quantities.get(product.name, 1),
                 widget=forms.NumberInput(attrs={
                     'class': 'quantity-input w-20 text-right border rounded p-1',
-                    'step': '0.01',
+                    'id': f'quantity-{product.id}',
+                    'step': '0.5',
                     'min': '0',
-                    'data-price': str(product.price_per_kg),   # Store price per kg for JavaScript calculations
+                    'data-price': str(product.price_per_kg),
+                    'placeholder': f'Qty for {product.name}',
+                    'autocomplete': 'off',
                 })
             )
