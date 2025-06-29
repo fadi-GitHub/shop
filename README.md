@@ -49,6 +49,6 @@ A Django-based shopping cart functionality
 
 ```
 ![image alt](https://github.com/fadi-GitHub/shop/blob/df184a8f516a4cb527e36025b80d171791f50abb/images/Screenshot%202025-06-30%20at%2012.32.00%E2%80%AFam.png)
-![image alt]([images/Screenshot 2025-06-30 at 12.32.40 am.png](https://github.com/fadi-GitHub/shop/blob/87a61785139240eb35cb61bed838aa11f4ad2982/images/Screenshot%202025-06-30%20at%2012.32.40%E2%80%AFam.png))
+![image alt](https://github.com/fadi-GitHub/shop/blob/87a61785139240eb35cb61bed838aa11f4ad2982/images/Screenshot%202025-06-30%20at%2012.32.40%E2%80%AFam.png)
 ![image alt](images/Screenshot 2025-06-30 at 12.33.06 am.png)
 ![image alt](images/Screenshot 2025-06-30 at 12.33.32 am.png)
